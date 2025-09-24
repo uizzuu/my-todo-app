@@ -11,3 +11,8 @@ export type GreetingProps = {
     user: User,
     age?: number,
 }
+
+export interface LoginFormValues{
+    email: string,
+    password: string,
+}
