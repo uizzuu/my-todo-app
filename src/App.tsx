@@ -1,8 +1,11 @@
 import "./App.css";
 import type { User } from "./types/user";
-import Greeting from "./components/Greeting";
+import { Greeting, LoginForm } from "./components";
+import usePosts from "./hooks/usePosts";
 
 function App() {
+  const { posts, loading } = usePosts();
+
   const jang: User = {
     id: 1,
     name: "장원영",
@@ -28,6 +31,29 @@ function App() {
 
   return (
     <div>
+      <h1>Posts ({posts.length})</h1>
+
+      {/* 간단 목록 */}
+      <ul style={{ lineHeight: 1.6 }}>
+        {posts.slice(0, 10).map((p) => (
+          <li key={p.id}>
+            <strong>#{p.id}</strong> {p.title}
+          </li>
+        ))}
+      </ul>
+
+      {/* 첫 글 상세 미리보기 */}
+      {posts[0] && (
+        <section style={{ marginTop: 24 }}>
+          <h2>첫 글 상세</h2>
+          <h3>{posts[0].title}</h3>
+          <p>{posts[0].body}</p>
+          <small>by user {posts[0].userId}</small>
+        </section>
+      )}
+      <hr />
+      <LoginForm />
+      <hr />
       <h1>User 정보</h1>
       <ul>
         <li>id : {jang.id}</li>
