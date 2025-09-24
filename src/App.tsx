@@ -1,10 +1,21 @@
 import "./App.css";
 import type { User } from "./types/user";
-import { Greeting, LoginForm } from "./components";
+import {
+  Greeting,
+  LoginForm,
+  TodoItem,
+  TodoApp,
+  UserProfile,
+} from "./components";
 import usePosts from "./hooks/usePosts";
 
 function App() {
   const { posts, loading } = usePosts();
+
+  const user: User = {
+    name: '김개발',
+    email: 'kim.dev@example.com',
+  }
 
   const jang: User = {
     id: 1,
@@ -31,6 +42,11 @@ function App() {
 
   return (
     <div>
+      <h1>사용자 프로필</h1>
+      <UserProfile user={user} />
+      <hr />
+      <TodoApp />
+      <hr />
       <h1>Posts ({posts.length})</h1>
 
       {/* 간단 목록 */}
@@ -52,6 +68,7 @@ function App() {
         </section>
       )}
       <hr />
+      <h1>로그인</h1>
       <LoginForm />
       <hr />
       <h1>User 정보</h1>
